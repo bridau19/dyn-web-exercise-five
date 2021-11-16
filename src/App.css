@@ -1,0 +1,27 @@
+.Header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 25px
+}
+
+.Header .Logo {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.Header nav {
+  display:flex;
+}
+
+.Header nav a {
+  color: black;
+  font-size: 16px;
+  margin: 0 10px;
+  padding: 2px 10px;
+}
+
+.Header nav a:last-child {
+  margin-right: 0;
+  padding-right: 0;
+}

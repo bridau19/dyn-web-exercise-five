@@ -1,10 +1,11 @@
 import React from "react";
 
 function CreateUserForm() {
-    return 
+    return (
     <div>
         <h2>Create User Form</h2>
-    </div>;
+    </div>
+    );
 }
 
 export default CreateUserForm;
