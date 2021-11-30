@@ -10,8 +10,6 @@ import CreateUser from './pages/CreateUser';
 import Header from "./components/Header";
 import UserProfile from "./pages/UserProfile";
 import FirebaseConfig from './components/FirebaseConfig';
-import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from "react"; // um what.. delete later
-
 
 function App() {
   // track if user is logged in
