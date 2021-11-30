@@ -8,3 +8,9 @@
 
 ## User Flow and Sign up
 ## Deployed to Netlify
+
+## Setting up logout
+1. setup Login Form (nearly identical to CreateForm)
+2. Create login useCallback function (nearly identical to Create)
+3. Passed login function to form as a prop
+4. Passed props to Login component from App.js
