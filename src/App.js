@@ -20,7 +20,7 @@ function App() {
   const [userInformation, setUserInformation] = useState({});
   const [appInitialized, setAppInitialized] = useState(false);
   // error
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState();
 
 
   useEffect(() => {
@@ -60,7 +60,7 @@ function logout() {
   })
     .catch((error) => {
       console.warn(error)
-      setErrors(error);
+      setErrors(error.errorMessage);
   });
 }
 
@@ -69,7 +69,7 @@ function logout() {
   return (
     <>
     <Header logout={logout} loggedIn={loggedIn} />
-    {errors && <p className="Error">{}</p>}
+    {errors && <p className="Error">{errors}</p>}
 
       <Router>
         <Routes>
