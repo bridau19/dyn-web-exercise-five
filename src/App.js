@@ -19,16 +19,19 @@ function App() {
   // state user information in state
   const [userInformation, setUserInformation] = useState({});
   const [appInitialized, setAppInitialized] = useState(false);
+  // error
+  const [errors, setErrors] = useState({});
+
 
   useEffect(() => {
-      // initialize firebase
+    // initialize firebase
     initializeApp(FirebaseConfig);
     setAppInitialized(true);
   }, []);
 
-    // Check to see if user is logged in 
-    // user loads page, check their status
-    // set state accordingly
+  // Check to see if user is logged in 
+  // user loads page, check their status
+  // set state accordingly
   useEffect(() => {
     if (appInitialized) {
       const auth = getAuth();
@@ -51,13 +54,13 @@ function logout() {
   const auth = getAuth();
   signOut(auth)
     .then(() => {
-      // Sign-out successful.
       setUserInformation({});
       setLoggedIn(false);
+      setErrors();
   })
     .catch((error) => {
-      // An error happened.
       console.warn(error)
+      setErrors(error);
   });
 }
 
@@ -66,8 +69,8 @@ function logout() {
   return (
     <>
     <Header logout={logout} loggedIn={loggedIn} />
-      {/* <p>User {loggedIn ? `IS LOGGED IN` : `IS NOT LOGGED IN`}</p>
-      <p>Email {userInformation.email}</p> */} 
+    {errors && <p className="Error">{}</p>}
+
       <Router>
         <Routes>
           <Route 
@@ -84,27 +87,29 @@ function logout() {
             path='/create'
             element={
               !loggedIn ? (
-              <CreateUser 
-                setLoggedIn = {setLoggedIn}
-                setUserInformation={setUserInformation}
-              />
-            ) : (
-              <Navigate to={`/user/${userInformation.uid}`} />
-            )
-          } 
+                <CreateUser 
+                  setLoggedIn = {setLoggedIn}
+                  setUserInformation={setUserInformation}
+                  setErrors={setErrors}
+                />
+              ) : (
+                <Navigate to={`/user/${userInformation.uid}`} />
+              )
+           } 
           />
           <Route 
             path='/' 
             element={
               !loggedIn ? (
-              <Login 
-                setLoggedIn = {setLoggedIn}
-                setUserInformation={setUserInformation}
-              />
-            ) : (
-              <Navigate to={`/user/${userInformation.uid}`} />
-            )
-          } 
+                <Login 
+                  setLoggedIn = {setLoggedIn}
+                  setUserInformation={setUserInformation}
+                  setErrors={setErrors}
+                />
+              ) : (
+                <Navigate to={`/user/${userInformation.uid}`} />
+              )
+            } 
           />
         </Routes>
       </Router>

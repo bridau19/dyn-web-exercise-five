@@ -3,16 +3,13 @@ import CreateUserForm from "../components/CreateUserForm";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 
-function CreateUser({setLoggedIn, setUserInformation}) {
+function CreateUser({setErrors, setLoggedIn, setUserInformation}) {
 
     const signUpUser = useCallback((e) => {
         e.preventDefault();
         
         const email = e.currentTarget.email.value;
         const password = e.currentTarget.password.value;
-
-        // DELETE BEFORE SUBMIT
-        // console.log({ email, password })
 
         const auth = getAuth();
 
@@ -26,14 +23,15 @@ function CreateUser({setLoggedIn, setUserInformation}) {
                 uid: user.uid,
                 accessToken: user.accessToken,
             });
-            // console.log({ user });
+            setErrors();
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.warn({ error, errorCode, errorMessage });
+            setErrors(errorMessage);
         });
-    }, [setLoggedIn, setUserInformation]
+    }, [setErrors, setLoggedIn, setUserInformation]
     );
 
     return (
